@@ -3,10 +3,10 @@ import mysql.connector
 def get_cell_from_mysql(db_config, query):
     # Verbindung zur Datenbank herstellen
     connection = mysql.connector.connect(
-        host=db_config['host'],
-        user=db_config['user'],
-        password=db_config['password'],
-        database=db_config['database']
+        host=db_config['localhost'],
+        user=db_config['Python'],
+        password=db_config['KOLSQL'],
+        database=db_config['inhalt']
     )
 
     cursor = connection.cursor()
