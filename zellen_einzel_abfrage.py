@@ -30,8 +30,8 @@ db_config = {
     'database': 'kol'
 }
 
-spalte = input()
-bedingung = input()
+spalte = 'Masse_des_Kernes'
+bedingung = input("Gib die ID ein: ")
 
 # SQL-Abfrage für die gewünschte Zelle
 query = "SELECT {spalte} FROM inhalt WHERE {bedingung} LIMIT 1"
