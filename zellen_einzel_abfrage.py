@@ -24,14 +24,17 @@ def get_cell_from_mysql(db_config, query):
 
 # Konfigurationsdaten für die Verbindung
 db_config = {
-    'host': 'dein_host',
-    'user': 'dein_benutzername',
-    'password': 'dein_passwort',
-    'database': 'deine_datenbank'
+    'host': 'localhost',
+    'user': 'Python',
+    'password': 'KOSQL',
+    'database': 'kol'
 }
 
+spalte = input()
+bedingung = input()
+
 # SQL-Abfrage für die gewünschte Zelle
-query = "SELECT deine_spalte FROM deine_tabelle WHERE deine_bedingung LIMIT 1"
+query = "SELECT {spalte} FROM inhalt WHERE {bedingung} LIMIT 1"
 
 # Abfrage ausführen und Ergebnis ausgeben
 cell_value = get_cell_from_mysql(db_config, query)
