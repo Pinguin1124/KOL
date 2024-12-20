@@ -25,4 +25,6 @@ if myresult:
 else:
     print("Keine Zeile mit der angegebenen Nummer gefunden.")
 
+print("Immer der letzte Wert ist die Bindungsenergie!")
+
 input("Zum Beenden Enter drücken!")
