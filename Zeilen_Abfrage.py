@@ -2,10 +2,10 @@ import mysql.connector
 
 # Verbindung zur Datenbank herstellen
 mydb = mysql.connector.connect(
-  host="localhost",  # Ersetze durch deinen Hostnamen
-  user="Python",  # Ersetze durch deinen Benutzernamen
-  password="KOLSQL",  # Ersetze durch dein Passwort
-  database="kol"  # Ersetze durch den Namen deiner Datenbank
+  host="localhost",
+  user="Python",
+  password="KOLSQL",
+  database="kol" 
 )
 
 mycursor = mydb.cursor()
