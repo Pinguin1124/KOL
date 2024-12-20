@@ -10,19 +10,19 @@ mydb = mysql.connector.connect(
 
 mycursor = mydb.cursor()
 
-# Wert für LIMIT während der Laufzeit eingeben
-limit_value = int(input("Bitte gib deine ID ein: "))
+# Wert für die ID während der Laufzeit eingeben
+row_number = int(input("Bitte gib die Zeilenummer ein, die du anzeigen möchtest: "))
 
-# SQL-Abfrage mit LIMIT-Variable ausführen
-query = "SELECT * FROM inhalt LIMIT %s"
-mycursor.execute(query, (limit_value,))
+# SQL-Abfrage mit LIMIT und OFFSET-Klausel, um eine bestimmte Zeile auszuwählen
+query = "SELECT * FROM inhalt LIMIT 1 OFFSET %s"
+mycursor.execute(query, (row_number - 1,))  # OFFSET beginnt bei 0
 
 # Ergebnis abrufen
-myresult = mycursor.fetchall()
+myresult = mycursor.fetchone()
 
-for row in myresult:
-    print(row)
-
-print("Der letzte Wert entspricht der Bindungsenergie!")
+if myresult:
+    print(myresult)
+else:
+    print("Keine Zeile mit der angegebenen Nummer gefunden.")
 
 input("Zum Beenden Enter drücken!")
