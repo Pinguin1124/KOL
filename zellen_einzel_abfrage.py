@@ -1,19 +1,19 @@
 import mysql.connector
 
-def get_cell_from_mysql(db_config, query):
+def get_cell_from_mysql(db_config, query, params):
     # Verbindung zur Datenbank herstellen
     connection = mysql.connector.connect(
-        host=db_config['localhost'],
-        user=db_config['Python'],
-        password=db_config['KOLSQL'],
-        database=db_config['inhalt']
+        host=db_config['host'],
+        user=db_config['user'],
+        password=db_config['password'],
+        database=db_config['database']
     )
 
     cursor = connection.cursor()
 
     try:
         # SQL-Abfrage ausführen
-        cursor.execute(query)
+        cursor.execute(query, params)
         result = cursor.fetchone()
 
         # Rückgabe der ersten Zelle des Ergebnisses
@@ -34,8 +34,8 @@ spalte = 'Masse_des_Kernes'
 bedingung = input("Gib die ID ein: ")
 
 # SQL-Abfrage für die gewünschte Zelle
-query = "SELECT {spalte} FROM inhalt WHERE {bedingung} LIMIT 1"
+query = f"SELECT {spalte} FROM inhalt WHERE id = %s LIMIT 1"
 
 # Abfrage ausführen und Ergebnis ausgeben
-cell_value = get_cell_from_mysql(db_config, query)
+cell_value = get_cell_from_mysql(db_config, query, (bedingung,))
 print(f'Der Wert der Zelle ist: {cell_value}')
