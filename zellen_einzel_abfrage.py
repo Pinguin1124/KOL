@@ -1,41 +1,27 @@
 import mysql.connector
 
-def get_cell_from_mysql(db_config, query, params):
-    # Verbindung zur Datenbank herstellen
-    connection = mysql.connector.connect(
-        host=db_config['host'],
-        user=db_config['user'],
-        password=db_config['password'],
-        database=db_config['database']
-    )
+# Verbindung zur Datenbank herstellen
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="Python",
+  password="KOLSQL",
+  database="kol"
+)
 
-    cursor = connection.cursor()
+mycursor = mydb.cursor()
 
-    try:
-        # SQL-Abfrage ausführen
-        cursor.execute(query, params)
-        result = cursor.fetchone()
+# Bedingung während der Laufzeit eingeben
+yourcondition = input("Bitte gib deine ID ein: ")
 
-        # Rückgabe der ersten Zelle des Ergebnisses
-        return result[0] if result else None
-    finally:
-        cursor.close()
-        connection.close()
+# Beispiel für eine spezifische Zellenabfrage mit der Bedingung
+query = f"SELECT Masse_des_gesamten_Kernes FROM inhalt WHERE {yourcondition}"
 
-# Konfigurationsdaten für die Verbindung
-db_config = {
-    'host': 'localhost',
-    'user': 'Python',
-    'password': 'KOSQL',
-    'database': 'kol'
-}
+mycursor.execute(query)
 
-spalte = 'Masse_des_Kernes'
-bedingung = input("Gib die ID ein: ")
+# Ergebnis abrufen
+myresult = mycursor.fetchone()
 
-# SQL-Abfrage für die gewünschte Zelle
-query = f"SELECT {spalte} FROM inhalt WHERE id = %s LIMIT 1"
+# Ausgabe der abgerufenen Zelle
+print(myresult[0]) if myresult else print("Keine Daten gefunden")
 
-# Abfrage ausführen und Ergebnis ausgeben
-cell_value = get_cell_from_mysql(db_config, query, (bedingung,))
-print(f'Der Wert der Zelle ist: {cell_value}')
+input("Zum Beenden Enter drücken!")
