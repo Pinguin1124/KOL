@@ -11,7 +11,7 @@ mydb = mysql.connector.connect(
 mycursor = mydb.cursor()
 
 # Wert für die ID während der Laufzeit eingeben
-row_number = int(input("Bitte gib die Zeilenummer ein, die du anzeigen möchtest: "))
+row_number = int(input("Was ist die ID deines Elmentes? "))
 
 # SQL-Abfrage mit LIMIT und OFFSET-Klausel, um eine bestimmte Zeile auszuwählen
 query = "SELECT * FROM inhalt LIMIT 1 OFFSET %s"
